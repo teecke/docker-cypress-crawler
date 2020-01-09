@@ -20,7 +20,7 @@ function run-crawler() {
     briefMessage="Execute cypress crawler"
     helpMessage=$(cat <<EOF
 Execute the crawler over the URL listed in the "cypress/fixtures/example.json" file.
-After that, find the related screenshots and videos under the `results` directory
+After that, find the related screenshots and videos under the "results" directory
 EOF
 )
 

@@ -32,8 +32,8 @@ pipeline {
         }
         stage ('Crawler test') {
             steps {
-                docker.build("teecke/docker-cypress-crawler:latest", ".")
                 script {
+                    docker.build("teecke/docker-cypress-crawler:latest", ".")
                     sh '''
                     cp cypress/fixtures/url_list.json.dist cypress/fixtures/url_list.json
                     devcontrol run-crawler

@@ -30,6 +30,16 @@ pipeline {
                 }
             }
         }
+        stage ('Crawler test') {
+            steps {
+                script {
+                    sh '''
+                    cp cypress/fixtures/url_list.json.dist cypress/fixtures/url_list.json
+                    devcontrol run-crawler
+                    '''
+                }
+            }
+        }
         stage ('Make release') {
             when { branch 'release/new' }
             steps {

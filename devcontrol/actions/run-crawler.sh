@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # @description Run crawler
 #
 # @example
@@ -34,12 +36,12 @@ EOF
             ;;
         exec)
             mkdir -p results
-            ctid=$(docker run -ti --rm -d test bash)
+            ctid=$(docker run --rm -d teecke/docker-cypress-crawler tail -f /dev/null)
+            docker cp cypress/fixtures "${ctid}:/workspace/cypress"
             docker exec "${ctid}" npm run cypress:run
-            docker cp "${ctid}:/workspace/cypress/screenshots" results/screenshots
-            docker cp "${ctid}:/workspace/cypress/videos"      results/videos
+            docker cp "${ctid}:/workspace/cypress/screenshots" results
+            docker cp "${ctid}:/workspace/cypress/videos"      results
             docker rm -f "${ctid}"
-
             ;;
         *)
             showNotImplemtedMessage "$1" "${FUNCNAME[0]}"

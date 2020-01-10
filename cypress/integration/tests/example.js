@@ -1,13 +1,13 @@
+const urlList = require("../../fixtures/url_list.json");
 
-describe('example', function() {
+let testNumber = 0
 
- it('test_example', function() {
-    cy.viewport(1440, 768)
-
-    cy.visit('https://www.google.es/')
- 
-    cy.screenshot()
- 
- })
-
-})
+describe('crawler', function() {
+   urlList.forEach((url) => {
+      testNumber++;
+      it(`Navigation number ${testNumber}: Visiting URL ${url}`, function() {
+         cy.visit(url)
+         cy.screenshot(testNumber + "_" + Cypress.moment().format('YYYYMMDD_hhmmss_SSS'))
+      });
+   });
+});

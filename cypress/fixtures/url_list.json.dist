@@ -1,7 +1,5 @@
-{
-  "url" : [ 
+[ 
     "https://cloud.google.com/",
     "https://aws.amazon.com/",
     "https://azure.microsoft.com/en-us/"
-  ]
-}
+]

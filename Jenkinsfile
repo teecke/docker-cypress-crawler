@@ -7,7 +7,7 @@ cfg = jplConfig('docker-cypress-crawler', 'docker', '', [email: env.CITEECKE_NOT
 
 def publishDockerImage() {
     nextReleaseNumber = sh (script: "kd get-next-release-number .", returnStdout: true).trim().substring(1)
-    docker.withRegistry("https://registry.hub.docker.com", 'teeckebot-docker-credentials') {
+    docker.withRegistry("", 'teeckebot-docker-credentials') {
         def customImage = docker.build("teecke/docker-cypress-crawler:${nextReleaseNumber}", ".")
         customImage.push()
         customImage.push('latest')
@@ -25,9 +25,7 @@ pipeline {
         }
         stage ('Bash linter') {
             steps {
-                script {
-                    sh 'devcontrol run-bash-linter'
-                }
+                sh 'devcontrol run-bash-linter'
             }
         }
         stage ('Crawler test') {
